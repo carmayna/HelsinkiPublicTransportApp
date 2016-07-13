@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textViewSelectJourney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_select_journey"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+	
+    <Spinner
+	    android:id="@+id/journeysSpinner"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+	
+    <TextView
+        android:id="@+id/textViewJourneyId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_journey_id"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/journeyId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <TextView
+        android:id="@+id/textViewJourneyFrom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_journey_from"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/journeyFrom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <TextView
+        android:id="@+id/textViewJourneyTo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_journey_to"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+   
+	<TextView
+        android:id="@+id/journeyTo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <Button
+        android:id="@+id/buttonSelectJourney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="selectJourney"
+        android:text="@string/button_select_journey" />
+
+    <Button
+        android:id="@+id/buttonBackJourney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="back"
+        android:text="@string/button_back_journey" />
+	
+</LinearLayout>

@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/resultLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_select_route"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+	
+    <Spinner
+	    android:id="@+id/routesSpinner"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/buttonChangeSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="changeSearch"
+            android:layout_weight="1"
+            android:text="@string/button_change_search" />
+
+        <Button
+            android:id="@+id/buttonSaveJourney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="saveJourney"
+            android:layout_weight="1"
+            android:text="@string/button_save_journey" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/verticalLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            
+        </LinearLayout>
+    </ScrollView>
+	
+</LinearLayout>

@@ -1,0 +1,36 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/buttonMenuSearchRoute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="searchRoute"
+        android:text="@string/button_search_route" />
+    
+    <Button
+        android:id="@+id/buttonMenuLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="login"
+        android:text="@string/button_login" />
+    
+    <Button
+        android:id="@+id/buttonMenuLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="logout"
+        android:text="@string/button_logout" />
+
+    <Button
+        android:id="@+id/buttonMenuRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="register"
+        android:text="@string/button_register" />
+
+</LinearLayout>

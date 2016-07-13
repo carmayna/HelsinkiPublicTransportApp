@@ -1,0 +1,83 @@
+---------------------------------------------
+|                                           |
+|  ASSIGNMENT 3: MOBILE SOFTWARE            |
+|  Network Application Framework            |
+|                                           |
+|  Author: Carlos Maycas Nadal              |
+|  Student number: 414926                   |
+|  Group 36                                 |
+|  Course 2013/2014                         |
+|                                           |
+|--------------------------------------------
+
+################################
+     Android applications
+################################
+
+-------
+Folders
+-------
+
+- LearningTheBasics: App for the task Learning the basics 
+- HelsinkiPublicTransport: App for the Own application task
+- TwitterSimpleClient: App for the two optional tasks
+
+-------------------
+Additional comments
+-------------------
+
+- The app requires the setting up of the Google Play Services SDK. The following URL contain
+a guide to install it: http://developer.android.com/google/play-services/setup.html
+
+################################
+TRANSPORT ROUTE REST API SERVICE
+################################
+
+------
+URLs
+------
+
+- Index of the REST API:
+http://group36.naf.cs.hut.fi/transport_website/transporte_route/
+(Here you can find a detailed explanation of the requestes and responses of the REST API)
+
+- Register a user:
+http://group36.naf.cs.hut.fi/transport_website/transporte_route/register_user
+
+- Login
+http://group36.naf.cs.hut.fi/transport_website/transporte_route/login
+
+- Search route:
+http://group36.naf.cs.hut.fi/transport_website/transporte_route/search_route
+
+- Save journey:
+http://group36.naf.cs.hut.fi/transport_website/transporte_route/save_journey
+
+- Retrieve saved journeys:
+http://group36.naf.cs.hut.fi/transport_website/transporte_route/retrieve_saved_journeys
+
+-----
+Setup
+-----
+
+Download the assignment_3 directory on the server from the repository https://git.niksula.hut.fi/naf/group36 
+
+Create a new directory called transport_website in the folder public_html of the server.
+Copy the index.fcgi and .htaccess files from the assignment_3/transport_website folder in the new transport_website folder.
+
+Edit the index.fcgi file changing the next line:
+	sys.path.insert(0, "{absolute_path_to_django_project}")
+
+Edit the file settings.py in social_webiste folder:
+	STATIC_ROOT = '{absolute_path_to_static}'
+This indicates the server where it have to find for the static files.
+
+Go to directory group36/assignment_3/transport_website and type on the console:
+	python manage.py collectstatic
+This will copy all the static files in a new folder static. This is done to serve the static files in ther server-side.
+
+-------------------
+Additional comments
+-------------------
+
+- The documentation of the project is found in the file Assignment3_Documentation.pdf inside the folder assignment_3

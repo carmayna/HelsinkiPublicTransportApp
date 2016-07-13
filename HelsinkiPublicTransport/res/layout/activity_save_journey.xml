@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+   	
+    <TextView
+        android:id="@+id/textViewJourneyId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_journey_id"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+    
+    <EditText
+        android:id="@+id/journeyIdEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/edit_text_journey_id" />
+    
+    <TextView
+        android:id="@+id/textViewJourneyFrom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_journey_from"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/journeyFrom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <TextView
+        android:id="@+id/textViewJourneyTo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_journey_to"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+   
+	<TextView
+        android:id="@+id/journeyTo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <Button
+        android:id="@+id/buttonSaveJourney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="saveJourney"
+        android:text="@string/button_save_journey" />
+
+    <Button
+        android:id="@+id/buttonBackSaveJourney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="back"
+        android:text="@string/button_back_journey" />
+	
+</LinearLayout>

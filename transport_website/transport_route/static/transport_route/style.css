@@ -1,0 +1,21 @@
+/* Body */
+body {
+    background-color:#9999FF;
+}
+
+/* Define font of the document */
+*{font-family:Arial,Helvetica,sans-serif;}
+
+/* Header 1 */
+h1 {
+	color: #003366;
+    text-align: center;
+    border-style: dashed;
+    font-size:60px;
+}
+
+/* Links */
+a:link {color:black; text-decoration:none;}    /* unvisited link */
+a:visited {color:black; text-decoration:none;} /* visited link */
+a:hover {color:white; text-decoration:none;}   /* mouse over link */
+a:active {color:white; text-decoration:none;}  /* selected link */

@@ -1,0 +1,442 @@
+{% load staticfiles %}
+{# Load CSS stylesheet #}
+<link rel="stylesheet" type="text/css" href="{% static 'transport_route/style.css' %}" />
+
+<head>
+<style>
+table,th,td
+{
+border:1px solid black;
+border-collapse:collapse;
+}
+th,td
+{
+padding:5px;
+}
+</style>
+</head>
+
+<div id="container" >
+
+    {# REST API title #}
+
+    <div id="header" style="margin-left:150px; margin-right:150px; color:#003366;">
+        <h1>HRT Routes REST API</h1>
+    </div>
+
+    {# End title #}
+
+    {# Sidebar #}
+
+    <div id="sidebar" align="center" style="width:200px; float:right; margin-right:150px;">
+        <div id="menu" align="center" style="border-style: solid; width:200px; padding-bottom:10px; background-color:#009999;">
+            <p><b><u>INDEX</b></u></p>
+            <p><a href="#register_user">Register user</a></p>
+            <p><a href="#login">Login</a></p>
+            <p><a href="#search_routes">Search routes</a></p>
+            <p><a href="#save_journey">Save journey</a></p>
+            <p><a href="#retrieve_journeys">Retrieve journeys</a></p>
+        </div>
+    </div>
+
+    {# End Sidebar #}
+
+    {# Services #}
+
+    <div id="services" style="float:left; margin-left:150px;">
+        <div id="service" style="border-top: solid; border-width:1px; width:800px; margin-bottom:1cm;">
+            {# Title of the service #}
+            <a name="register_user"></a>
+            <h2>Register a user</h2>
+
+            <p><b>URL:</b> http://group36.naf.cs.hut.fi/transport_website/transport_route/register_user</p>
+
+            {# Explanation #}
+            <p>Register a user in the system. This is required in order to get access to authorization-required data of the server.</p>
+
+            <p><b>Request parameters</b></p>
+
+            <table>
+                <tr bgcolor="#00CC33">
+                    <th>Parameter</th>
+                    <th style="width:575px">Explanation</th>     
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>name</td>
+                    <td>String. Name of the user</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>username</td>
+                    <td>String. Username of the user</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>password</td>
+                    <td>String. Password of the user</td>
+                </tr>
+            </table>
+
+            <p><b>Response</b></p>
+
+            <table>
+                <tr bgcolor="#00CC33">
+                    <th>Parameter</th>
+                    <th style="width:575px">Explanation</th>     
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>status</td>
+                    <td>Status of the result of the request. Values:
+                        <ul>
+                        <li>'user created': Succesfull registration</li>
+                        <li>'username already exists': It has not been possible to register because there is another user with the same username</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="service" style="border-top: solid; border-width:1px; width:800px; margin-bottom:1cm;">
+            {# Title of the service #}
+            <a name="login"></a>
+            <h2>Login</h2>
+
+            {# Resume of the service #}
+            <p><b>URL:</b> http://group36.naf.cs.hut.fi/transport_website/transport_route/login</p>
+
+            {# Explanation #}
+            <p>Log in the system using user's credentials. This authorization is required in order to get access to authorization-required data on the server using the access token.</p>
+
+            <p><b>Request parameters</b></p>
+
+            <table>
+                <tr bgcolor="#00CC33">
+                    <th>Parameter</th>
+                    <th style="width:575px">Explanation</th>     
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>username</td>
+                    <td>String. Username of the user</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>password</td>
+                    <td>String. Password of the user</td>
+                </tr>
+            </table>
+
+            <p><b>Response</b></p>
+
+            <table>
+                <tr bgcolor="#00CC33">
+                    <th>Parameter</th>
+                    <th style="width:575px">Explanation</th>     
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>status</td>
+                    <td>String. Status of the result of the request. Values
+                        <ul>
+                        <li>'correct login': Succesfull log in</li>
+                        <li>'user do not exists': User with indicated username does not exist in the system</li>
+                        <li>'incorrect password': Indicated password does not match with the user password</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>access_token</td>
+                    <td>String. Access token for the user. Will be used in next request, for example to save a journey</td>
+                </tr>
+            </table>
+        </div>
+        <div id="service" style="border-top: solid; border-width:1px; width:800px; margin-bottom:1cm;">
+            {# Title of the service #}
+            <a name="search_routes"></a>
+            <h2>Search routes</h2>
+
+            <p><b>URL:</b> http://group36.naf.cs.hut.fi/transport_website/transport_route/search_routes</p>
+
+            {# Explanation #}
+            <p>Example of explanation</p>
+
+            <p><b>Search possible routes using the Helsinki Region Transport values between two locations (from and to). The Routing API service from Reittiopas is used to retrieve the possible routes.</b></p>
+
+            <table>
+                <tr bgcolor="#00CC33">
+                    <th>Parameter</th>
+                    <th style="width:575px">Explanation</th>     
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>from_address | from_coord</td>
+                    <td>Indicate the place from where the route starts. This location can be passed as an string using the parameters from_address (e.g 'Kamppi terminal') or using coordinates with the parameter from_coord. The coordinates will be formed but the latitude and longitude in this order and separate by a comma (e.g '61.0213,25.7898').</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>to</td>
+                    <td>Indicate the destination of the route. This location can be passed as an string (e.g 'Jämeräntaival')</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>time</td>
+                    <td>Indicate the time bound to search routes. The retrieve routes will start from this time or after it. Format: HHMM</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>time_type</td>
+                    <td>Indicate if the time is for departure or for arrival. Valid values: 'departure' and 'arrival'. Format: HHMM</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>date</td>
+                    <td>Date when the journey starts. Format: YYYYMMDD</td>
+                </tr>
+            </table>
+
+            <p><b>Response</b></p>
+
+            <table>
+                <tr bgcolor="#00CC33">
+                    <th>Field nr.</th>
+                    <th>Parameter</th>
+                    <th style="width:575px">Explanation</th>     
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>0</td>
+                    <td>status</td>
+                    <td>String. Indicate the result of the request. This field can take differentes values:
+                        <ul>
+                        <li>'OK': Non error has ocurred during the request</li>
+                        <li>'origin no localizable': It has not been possible to find the location of the from field</li>
+                        <li>'destination no localizable': It has not been possible to find the location of the to field</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1</td>
+                    <td>routes</td>
+                    <td>Array that contains the several routes founded for the request. This array can be empty if the system has not found any route for the request. Maximum values: 3</td>
+                </tr>
+                 <tr bgcolor="#FFFFFF">
+                    <td>1.1</td>
+                    <td>from</td>
+                    <td>String. Address from the route starts</td>
+                </tr>
+                 <tr bgcolor="#FFFFFF">
+                    <td>1.2</td>
+                    <td>to</td>
+                    <td>String. Address where the route ends</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.3</td>
+                    <td>duration</td>
+                    <td>Integer. Duration in minutes of the route</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.4</td>
+                    <td>depTime</td>
+                    <td>String. Time of departure of the route. Format: HH:MM</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.5</td>
+                    <td>arrTime</td>
+                    <td>String. Time of arrival of the route. Format: HH:MM</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.6</td>
+                    <td>legs</td>
+                    <td>Array that contains several legs of the routes. Each leg can represents a stage of route done by one mean of transport (e.g. walking, bus...)</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.6.1</td>
+                    <td>duration</td>
+                    <td>Integer. Duration in minutes of the route</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.6.2</td>
+                    <td>type</td>
+                    <td>String. Meaning of transport of the route. The possible values can are:
+                        <ul>
+                        <li>walk: walking</li>
+                        <li>1 = Helsinki internal bus lines</li>
+                        <li>2 = trams</li>
+                        <li>3 = Espoo internal bus lines</li>
+                        <li>4 = Vantaa internal bus lines</li>
+                        <li>5 = regional bus lines</li>
+                        <li>6 = metro</li>
+                        <li>7 = ferry</li>
+                        <li>8 = U-lines</li>
+                        <li>12 = commuter trains</li>
+                        <li>21 = Helsinki service lines</li>
+                        <li>22 = Helsinki night buses</li>
+                        <li>23 = Espoo service lines</li>
+                        <li>24 = Vantaa service lines</li>
+                        <li>25 = region night buses</li>
+                        <li>36 = Kirkkonummi internal bus lines</li>
+                        <li>39 = Kerava internal bus lines</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.6.3</td>
+                    <td>code</td>
+                    <td>String. Optional. Code of the line</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.6.4</td>
+                    <td>length</td>
+                    <td>Integer. Length of the screen in meters</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.6.5</td>
+                    <td>depTime</td>
+                    <td>String. Time of departure of the leg. Format: HH:MM</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.6.6</td>
+                    <td>arrTime</td>
+                    <td>String. Time of arrival of the leg. Format: HH:MM</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.6.7</td>
+                    <td>locs</td>
+                    <td>Array of locations (e.g streets, bus stops...) that compose the leg</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.6.7.1</td>
+                    <td>name</td>
+                    <td>String. Name of the application</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.6.7.2</td>
+                    <td>deptTime</td>
+                    <td>String. Time of departure from the location. Format: HH:MM</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1.6.7.3</td>
+                    <td>shortCode</td>
+                    <td>Optional. String. Short code of the location (e.g bus stop code 'E1202')</td>
+                </tr>
+            </table>
+        </div>
+        <div id="service" style="border-top: solid; border-width:1px; width:800px; margin-bottom:1cm;">
+            {# Title of the service #}
+            <a name="save_journey"></a>
+            <h2>Save journey</h2>
+
+            <p><b>URL:</b> http://group36.naf.cs.hut.fi/transport_website/transport_route/save_journey</p>
+
+            {# Explanation #}
+            <p>Save a journey behalf a user in the system. A journey is composed by an identifier and the from and to location.</p>
+
+            <p><b>Request parameters</b></p>
+
+            <table>
+                <tr bgcolor="#00CC33">
+                    <th>Parameter</th>
+                    <th style="width:575px">Explanation</th>     
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>access_token</td>
+                    <td>String. Acccess token to identifiy with which user the journey will be saved.</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>id</td>
+                    <td>String. Identifier of the journey (e.g. 'University').</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>from</td>
+                    <td>String. Address of the origin of the journey.</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>to</td>
+                    <td>String. Address of the destination of the journey.</td>
+                </tr>
+            </table>
+
+            <p><b>Response</b></p>
+
+            <table>
+                <tr bgcolor="#00CC33">
+                    <th>Parameter</th>
+                    <th style="width:575px">Explanation</th>     
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>status</td>
+                    <td>String. Status of the result of the request. Values
+                        <ul>
+                        <li>'journey saved': Succesfull journey save</li>
+                        <li>'access token is not valid': The access token is not linked with any user</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="service" style="border-top: solid; border-width:1px; width:800px; margin-bottom:1cm;">
+            {# Title of the service #}
+            <a name="retrieve_journeys"></a>
+            <h2>Retrieve saved journeys</h2>
+
+            <p><b>URL:</b> http://group36.naf.cs.hut.fi/transport_website/transport_route/retrieve_saved_journeys</p>
+
+            {# Explanation #}
+            <p>Example of explanation</p>
+
+            <p><b>Request parameters</b></p>
+
+            <table>
+                <tr bgcolor="#00CC33">
+                    <th>Parameter</th>
+                    <th style="width:575px">Explanation</th>     
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>access_token</td>
+                    <td>String. Acccess token to identifiy from which user the journeys will be retrieved.</td>
+                </tr>
+            </table>
+
+            <p><b>Response</b></p>
+
+            <table>
+                <tr bgcolor="#00CC33">
+                    <th>Field nr.</th>
+                    <th>Parameter</th>
+                    <th style="width:575px">Explanation</th>     
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>1</td>
+                    <td>status</td>
+                    <td>String. Status of the result of the request. Values
+                        <ul>
+                        <li>'journeys retrieved': Succesfull journeys retrievement</li>
+                        <li>'access token is not valid': The access token is not linked with any user</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>2</td>
+                    <td>journeys</td>
+                    <td>Array with the several journeys saved by the user. It can be empty.</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>2.1</td>
+                    <td>id</td>
+                    <td>String. Identifier of the journey.</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>2.2</td>
+                    <td>from</td>
+                    <td>String. Address of the origin of the journey.</td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>2.3</td>
+                    <td>to</td>
+                    <td>String. Address of the destination of the journey.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    {# End Services #}
+
+    {# Footer #}
+
+    <div id="footer" style="clear:both;text-align:center; margin-left:150px; margin-right:150px;">
+        <hr style="color:black;">
+        <p>REST API developed by Carlos Maycas Nadal</p>
+        <p>Assignment for the course Network Application Frameworks 2013/2014</p>
+    </div>
+
+    {# End Footer #}
+
+</div>
